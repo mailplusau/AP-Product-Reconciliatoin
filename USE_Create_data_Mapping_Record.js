@@ -18,6 +18,11 @@
  * @returns {Void}
  */
 
+ //WS Edit: Allow Delete if Administrator or System Support
+var role = nlapiGetRole();
+//Administrator = 3
+//System Suport = 1032
+
 /** BEFORE SUBMIT FUNCTION **/
 function userEventBeforeSubmit_Create_Mapping_dat(type)
 {
@@ -25,7 +30,9 @@ function userEventBeforeSubmit_Create_Mapping_dat(type)
 	var rec_ID = nlapiGetRecordId();
 	nlapiLogExecution('DEBUG', 'Record Type before submit', rec_Type);
 
-	if(type == 'delete' && rec_Type == 'customrecord_product_reconciliation_data')
+	//if(type == 'delete' && rec_Type == 'customrecord_product_reconciliation_data')
+	//WS Edit: add role as a condition to trigger
+	if(type == 'delete' && rec_Type == 'customrecord_product_reconciliation_data' && role != 3 && role != 1032)
 	{
         try
 		{
@@ -51,7 +58,9 @@ function userEventBeforeSubmit_Create_Mapping_dat(type)
 		 }
 	  }	
 	
-	if(type == 'delete' && rec_Type == 'customrecord_pr_mappings')
+	//if(type == 'delete' && rec_Type == 'customrecord_pr_mappings')
+	//WS Edit: add role as a condition to trigger
+	if(type == 'delete' && rec_Type == 'customrecord_pr_mappings' && role != 3 && role != 1032)
 	{
         try
 		{
