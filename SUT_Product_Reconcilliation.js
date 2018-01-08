@@ -25,7 +25,7 @@ function suiteletFunction(request, response) {
 	var a_bill_mapping_OVERALL_array = new Array();
 	var a_GLOBAL_unmatch_array = new Array();
 	var a_unauthorised_array = '';
-	var i_user = nlapiGetUser();
+	var i_user = nlapiGetUser().toString();
 	//	280703 452187 219412
 	// DECLARE 2 ARRAY TO FOR SCROLLABLE FUNCTIONALITY 
 	var a_Bill_Array_scroll = new Array();
@@ -146,16 +146,16 @@ function suiteletFunction(request, response) {
 				// 	{
 				// 		var a_bill_order_mappings_array = o_PR_OBJ.getFieldValue('custrecord_apbill_approduct_mappings');
 				// 		// nlapiLogExecution('DEBUG', 'schedulerFunction',' Bill Order Mappings Array ['+i+'] --->' +a_bill_order_mappings_array);
-						
+
 				// 		var getUnmatch_File = o_PR_OBJ.getFieldValue('custrecord_unmatching_csv_file');
 				// 		nlapiLogExecution('DEBUG', 'schedulerFunction',' custrecord_unmatching_csv_file ' +getUnmatch_File);
-						
+
 				// 		 if(_logValidation(a_bill_order_mappings_array))
 				// 		 {
 				// 			var a_TT_array_values2 = new Array();	
 				// 			 var i_data_TT = new Array();
 				// 			 i_data_TT =  a_bill_order_mappings_array;
-							 
+
 				// 			 if(_logValidation(i_data_TT))
 				// 			 {		  
 				// 			      for(var dt=0;dt<i_data_TT.length;dt++)
@@ -164,72 +164,72 @@ function suiteletFunction(request, response) {
 				// 					    break;				
 				// 				  }						
 				// 			 }//Data TT	
-							 
+
 				// 			 // nlapiLogExecution('DEBUG', 'schedulerFunction',' TT Array Values --->' +a_TT_array_values);	 		    	
 				// 			 // nlapiLogExecution('DEBUG', 'schedulerFunction',' TT Array Values Length ['+i+'] --->' +a_TT_array_values.length);
-						    		    			
+
 				// 			  if(_logValidation(a_TT_array_values2))
 				// 			  {
 				// 				  var a_recon_array = new Array();
-								  
+
 				// 					   for(var t_x = 0 ; t_x<a_TT_array_values2.length ;t_x++)
 				// 					   {
 				// 					      var a_reconcile_array = a_TT_array_values2[t_x];
 				// 					      nlapiLogExecution('DEBUG', 'schedulerFunction','Reconcile Array ['+t_x+ '] -->' +a_reconcile_array);
-									   
+
 				// 					      if(_logValidation(a_reconcile_array))
 				// 				    	  {
 				// 				    	    var a_split_rec_array = new Array();
-								    	    
+
 				// 				    	    a_split_rec_array = a_reconcile_array.split('|');
-								    	    
+
 				// 				    	    var i_bill_1_G     = a_split_rec_array[0];    					    	  
 				// 				    	    var i_bill_2_G = a_split_rec_array[1];
-								    	    
+
 				// 				    	    i_bill_1_G = i_bill_1_G.replace(/[^0-9]/g, "");	 
 				// 				    	    i_bill_2_G = i_bill_2_G.replace(/[^0-9]/g, "");
-								    		 
+
 				// 				    	    var f_is_bill_fully_reconciled = is_AP_Bill_fully_reconciled(i_bill_1_G);   
 				// 				    	    var f_is_product_fully_reconciled  = is_AP_Product_Order_fully_reconciled(i_bill_2_G);
-								    	    
-								    	    
+
+
 				// 				    	    nlapiLogExecution('DEBUG', 'schedulerFunction','AP BIll ['+t_x+ '] -->' +i_bill_1_G +' is fully reconciled ? '+f_is_bill_fully_reconciled);
 				// 				    	    nlapiLogExecution('DEBUG', 'schedulerFunction','AP Product Order ['+t_x+ '] -->' +i_bill_2_G+' is fully reconciled ?'+f_is_product_fully_reconciled);
-										   
+
 				// 				    	    if(f_is_bill_fully_reconciled == true && f_is_product_fully_reconciled == true)
 				// 			    	    	{
 				// 				    	    	var s_str = '['+i_bill_1_G +'|'+ i_bill_2_G+']'
-								    	    	    					    	    	
+
 				// 				    	    	a_recon_array.push(s_str);
 				// 			    	    	}    					   
 				// 				    	  }
 				// 					     }
 				// 				        }
-							  
-							  
+
+
 				// 			   	 nlapiLogExecution('DEBUG', 'schedulerFunction','****************  Reconcile Array **************** -->' +a_recon_array);
-								  
+
 				// 		    	 if(_logValidation(a_recon_array))
 				// 	    		 {
 				// 	    		   for(var rc = 0 ;rc<a_recon_array.length ; rc++)
 				// 				   {
 				// 				     var s_str = a_recon_array[rc];
-								     
+
 				// 				     a_bill_order_mappings_array = a_bill_order_mappings_array.replace(s_str, '');
-								 	
+
 				// 				   }
 				// 	    		   nlapiLogExecution('DEBUG', 'schedulerFunction','****************  a_bill_order_mappings_array **************** -->' +a_bill_order_mappings_array);
-									
+
 				// 	    		 }		    	     
-						    	 
-						    	 
+
+
 				// 		    	 // CODE TO REMOVE FULLY RECONCILED MAPPING FROM UNPATCH FILE 
 				// 		    	 var s_unmatch_content = '';
 				// 		    	 var a_recon_array_ = new Array()
 				// 		    	 if(_logValidation(getUnmatch_File))
 				// 		    	 {
 				// 		    		 nlapiLogExecution('DEBUG', 'schedulerFunction','******* START getUnmatch_File ' +getUnmatch_File);
-						    		
+
 				// 		    		 // GET THE UNMATCHED FILE DATA 
 				// 		    		 var Obj_file = nlapiLoadFile(getUnmatch_File);
 				// 		  		     var s_unmatch_content_string = Obj_file.getValue();
@@ -240,7 +240,7 @@ function suiteletFunction(request, response) {
 				// 		  		    	 var s_unmatch_content_splitter = s_unmatch_content.toString().split('][');
 				// 		  		    	nlapiLogExecution('DEBUG', 'schedulerFunction','******* START s_unmatch_content_splitter ' +s_unmatch_content_splitter);
 				// 		  		    	nlapiLogExecution('DEBUG', 'schedulerFunction','******* START s_unmatch_content_splitter length ' +s_unmatch_content_splitter.length);
-						  		    	
+
 				// 		  		    	 for(var i_unmatch=0;i_unmatch < s_unmatch_content_splitter.length; i_unmatch++)
 				// 	  		    	     {
 				// 		  		    		 var s_unmatch = s_unmatch_content_splitter[i_unmatch] ;
@@ -257,7 +257,7 @@ function suiteletFunction(request, response) {
 				// 					    	     var f_is_product_fully_reconciled_  = is_AP_Product_Order_fully_reconciled(i_AP_Order);
 				// 					    	    //nlapiLogExecution('DEBUG', 'schedulerFunction','******* START f_is_bill_fully_reconciled_ ' +f_is_bill_fully_reconciled_);
 				// 			  		    	//nlapiLogExecution('DEBUG', 'schedulerFunction','******* START f_is_product_fully_reconciled_ ' +f_is_product_fully_reconciled_);
-							  		    	
+
 				// 					    	     // CHECK IF THE AP BILL AND AP ORDER ARE FULLY MAPPED 
 				// 					    	     if(f_is_bill_fully_reconciled_ == true && f_is_product_fully_reconciled_ == true)
 				// 			    	    	 {
@@ -266,15 +266,13 @@ function suiteletFunction(request, response) {
 				// 			    	    	 }
 				// 	  		    	     } // END OF FOR LOOP 
 				// 	  		    	 } // END OF   if(_logValidation(s_unmatch_content))
-						  		     
-						  		     
-						  		     
-						  		     
-						  		     
+
+
+
 				// 		    	 } // END OF  if(_logValidation(getUnmatch_File))
 				// 		    	 nlapiLogExecution('DEBUG', 'schedulerFunction','******* START a_recon_array_ TO REPLACE  ' +a_recon_array_);
-					  		    
-						    	 
+
+
 				// 		    	 // REPLACE FULLY MAPPED WITH SPACE 
 				// 		    	 if(_logValidation(a_recon_array_))
 				// 	    		 {
@@ -282,14 +280,14 @@ function suiteletFunction(request, response) {
 				// 				   {
 				// 				     var s_str = a_recon_array_[rc_];
 				// 				     s_unmatch_content = s_unmatch_content.replace(s_str, '');
-								 	
+
 				// 				   }
-					    		   
+
 				// 	    		 }
-						    	 
+
 				// 		    	 nlapiLogExecution('DEBUG', 'schedulerFunction','******* AFTER REPLACE   a_recon_array_ TO REPLACE  ' +s_unmatch_content);
-						  		    
-						    	 
+
+
 				// 		    	 // MAKE NOTEPAD FOR THE REMAINING CONTENT 
 				// 		 		//if(_logValidation(s_unmatch_content))
 				// 		 		{
@@ -300,21 +298,21 @@ function suiteletFunction(request, response) {
 				// 	 				var file_ID =  nlapiSubmitFile(file_obj);
 				// 	 				nlapiLogExecution('DEBUG', 'post_restlet_function', ' file_ID -->'+file_ID);
 				// 	 			    o_PR_OBJ.setFieldValue('custrecord_unmatching_csv_file',file_ID);
-					 				
+
 				// 		 		}
-						    	 
+
 				// 		    	// if(_logValidation(a_bill_order_mappings_array))
 				// 	    		 {
 				// 	    		    o_PR_OBJ.setFieldValue('custrecord_apbill_approduct_mappings',a_bill_order_mappings_array);
 				// 	    		 }
-						    	
+
 				// 		    	 var i_submitID = nlapiSubmitRecord(o_PR_OBJ,true,true);
 				// 		    	 nlapiLogExecution('DEBUG', 'schedulerFunction','**************** Product Reconcilliation Mappings ID **************** -->'+i_submitID);
-								
-							  
+
+
 				// 				} //Bill Mappings Array  
-						 
-						
+
+
 				// 	}//PR OBJ		  
 				// }
 			} else {
@@ -323,6 +321,7 @@ function suiteletFunction(request, response) {
 				});
 				o_product_mappingsOBJ.setFieldValue('custrecord_apbill_approduct_mappings', '');
 				o_product_mappingsOBJ.setFieldValue('custrecord_partner_user', i_user);
+				o_product_mappingsOBJ.setFieldValue('custrecord_recon_map_zee', i_user);
 				o_product_mappingsOBJ.setFieldValue('custrecord_unmatching_csv_file', '');
 				var i_submit_product_mappingsID = nlapiSubmitRecord(o_product_mappingsOBJ, true, true);
 				nlapiLogExecution('DEBUG', 'post_restlet_function', ' ------ Product Reconcilliation Mappings Submit ID {CREATE}-->' + i_submit_product_mappingsID);
@@ -875,11 +874,14 @@ function suiteletFunction(request, response) {
 		a_product_mapping_OVERALL_array = remove_duplicates(a_product_mapping_OVERALL_array);
 		a_bill_mapping_OVERALL_array = remove_duplicates(a_bill_mapping_OVERALL_array);
 
-	// ON BEFORELOAD UNMATCH ARRAY 
+		// ON BEFORELOAD UNMATCH ARRAY 
 		var s_unmatch_content = '';
 		var reconcile_Array_before_Load = '';
 		var reconcile_Array_before = '';
 		var s_unmatch_content_ar = '';
+		var a_product_mappings_array_ar = '';
+		var old_bill_id;
+		var old_po_id;
 		if (_logValidation(a_unmatching_File)) {
 			var Obj_file = nlapiLoadFile(a_unmatching_File);
 			var s_unmatch_content_string = Obj_file.getValue();
@@ -905,12 +907,12 @@ function suiteletFunction(request, response) {
 					i_bill_unreconcile_1_ = i_bill_unreconcile_1_.toString().replace(/minus/i, '|');
 					i_bill_orifinal_1 = i_bill_orifinal_1.toString().replace(/minus/i, '|');
 
-					if(u_ii == 0){
+					if (u_ii == 0) {
 						var iBillID = i_bill_id.split('[');
 						i_bill_id = iBillID[1];
 					}
 
-					if(u_ii == (s_unmatch_content_splitter.length - 1)){
+					if (u_ii == (s_unmatch_content_splitter.length - 1)) {
 						var iBillID = s_unmatch_rec_arrayr[12].split(']');
 						s_unmatch_rec_arrayr[12] = iBillID[0];
 					}
@@ -921,7 +923,7 @@ function suiteletFunction(request, response) {
 
 					var result = billArray.indexOf(i_bill_id);
 
-					if(result == -1){
+					if (result == -1) {
 
 					} else {
 						if (_logValidation(i_bill_unreconcile)) {
@@ -947,12 +949,12 @@ function suiteletFunction(request, response) {
 
 						var difference_2 = i_bill_orifinal_1 - i_bill_unreconcile_1_;
 						difference_2 = parseFloat(difference_2).toFixed(1);
-						
+
 
 						if (u_ii == 0 && u_ii == s_unmatch_content_splitter.length - 1) {
-							reconcile_Array_before = '['+ i_bill_id + '|' + i_ap_line_id + '|' + difference_1 + '|' + i_ap_line_id_1 + '|' + i_bill_id_1 + '|' + difference_2 + '|F]';
+							reconcile_Array_before = '[' + i_bill_id + '|' + i_ap_line_id + '|' + difference_1 + '|' + i_ap_line_id_1 + '|' + i_bill_id_1 + '|' + difference_2 + '|F]';
 						} else if (u_ii == 0) {
-							reconcile_Array_before = '['+ i_bill_id + '|' + i_ap_line_id + '|' + difference_1 + '|' + i_ap_line_id_1 + '|' + i_bill_id_1 + '|' + difference_2 + '|F]';
+							reconcile_Array_before = '[' + i_bill_id + '|' + i_ap_line_id + '|' + difference_1 + '|' + i_ap_line_id_1 + '|' + i_bill_id_1 + '|' + difference_2 + '|F]';
 						} else if (u_ii == s_unmatch_content_splitter.length - 1) {
 							reconcile_Array_before = '[' + i_bill_id + '|' + i_ap_line_id + '|' + difference_1 + '|' + i_ap_line_id_1 + '|' + i_bill_id_1 + '|' + difference_2 + '|F]';
 						} else {
@@ -969,9 +971,19 @@ function suiteletFunction(request, response) {
 						}
 
 						s_unmatch_content_ar += '[' + i_bill_id + '|' + s_unmatch_rec_arrayr[1] + '|' + s_unmatch_rec_arrayr[2] + '|' + s_unmatch_rec_arrayr[3] + '|' + s_unmatch_rec_arrayr[4] + '|' + s_unmatch_rec_arrayr[5] + '|' + s_unmatch_rec_arrayr[6] + '|' + s_unmatch_rec_arrayr[7] + '|' + s_unmatch_rec_arrayr[8] + '|' + s_unmatch_rec_arrayr[9] + '|' + s_unmatch_rec_arrayr[10] + '|' + s_unmatch_rec_arrayr[11] + '|' + s_unmatch_rec_arrayr[12] + ']';
+
+
+						if (i_bill_id == old_bill_id && i_ap_line_id_1 == old_po_id && !isNullorEmpty(old_bill_id) && !isNullorEmpty(old_po_id)) {
+							
+						} else {
+							a_product_mappings_array_ar += '[' + i_bill_id + '|' + i_ap_line_id_1 + ']'
+						}
 					}
 
-					
+
+					old_bill_id = i_bill_id;
+					old_po_id = i_ap_line_id_1;
+
 				} // END OF INNR IFF		      
 			} // END OF FOR 	 		   
 		}
@@ -980,6 +992,8 @@ function suiteletFunction(request, response) {
 
 
 		s_unmatch_content = s_unmatch_content_ar;
+		a_product_mappings_array = (a_product_mappings_array_ar);
+
 
 		nlapiLogExecution('DEBUG', 'a_product_mappings_array', a_product_mappings_array);
 		nlapiLogExecution('DEBUG', 'a_GLOBAL_unmatch_array', a_GLOBAL_unmatch_array);
@@ -1726,7 +1740,7 @@ function add_reconcile_ui(f_partner, i_partner, a_product_mappings_array, d_ap_b
 		strVar += "	   var s_inner_data_splitter = a_ap_bill_customerData_splitter[bb].split('@@@');"
 		strVar += "	if(s_inner_data_splitter[0] == i_bill_1_G )"
 		strVar += "{"
-			// IFF DROP AREA IS AP BILL THEN GET AP ORDER DATA 
+		// IFF DROP AREA IS AP BILL THEN GET AP ORDER DATA 
 		strVar += "if(type == 'apbill')"
 		strVar += "    	  {"
 		strVar += "	  var ID = s_inner_data_splitter[0];"
@@ -1735,7 +1749,7 @@ function add_reconcile_ui(f_partner, i_partner, a_product_mappings_array, d_ap_b
 		strVar += "		      return final_String ;"
 		strVar += "    break ;"
 		strVar += " 	  };"
-			// IFF DROP AREA IS AP ORDER  THEN GET AP BILL DATA   
+		// IFF DROP AREA IS AP ORDER  THEN GET AP BILL DATA   
 		strVar += "  if(type == 'aporder')"
 		strVar += "	  {"
 		strVar += " var ID = s_inner_data_splitter[0];"
@@ -2367,7 +2381,7 @@ function add_reconcile_ui(f_partner, i_partner, a_product_mappings_array, d_ap_b
 		strVar += "a_unmatch_array = a_unmatch_array.replace(unmatched_string2, '');";
 		strVar += "}";
 
-		
+
 
 		strVar += "var result_reconcile_array = a_reconcile_array.indexOf(unmatched_string_tobe_Replaced);";
 		strVar += "var result_reconcile_array2 = a_reconcile_array.indexOf(unmatched_string_tobe_Replaced2);";
@@ -2493,9 +2507,9 @@ function add_reconcile_ui(f_partner, i_partner, a_product_mappings_array, d_ap_b
 		strVar += "  var html_split = html.toString().split('(');"
 		strVar += "  var id = html_split[1].replace(/[^.0-9]/g,'');"
 		strVar += " }"
-			//strVar += "	   var obj_tb = jQuery('.aptable11111').attr('id');";
-			//strVar += "	   alert('html id-->'+id);";
-			//strVar += "	  jQuery('.'+id)[0].scrollIntoView(true); ";
+		//strVar += "	   var obj_tb = jQuery('.aptable11111').attr('id');";
+		//strVar += "	   alert('html id-->'+id);";
+		//strVar += "	  jQuery('.'+id)[0].scrollIntoView(true); ";
 		strVar += "	  jQuery('table [data-name='+id+']')[0].scrollIntoView(true); ";
 
 		strVar += "	  });";
@@ -2681,7 +2695,7 @@ function add_reconcile_ui(f_partner, i_partner, a_product_mappings_array, d_ap_b
 
 		strVar += "if(allowdrag == 1)";
 		strVar += "{"
-			//	strVar += "         	ui.helper.removeClass('draggable');";
+		//	strVar += "         	ui.helper.removeClass('draggable');";
 		strVar += "            	var html = jQuery(this).html();  ";
 		// strVar += "     alert('drag called -->:');";
 		strVar += " 		allowdrag = 0 ;";
@@ -4339,7 +4353,7 @@ function add_reconcile_ui(f_partner, i_partner, a_product_mappings_array, d_ap_b
 						strVar += "<td align=\"center\" width=\"25%\"  id = " + item_id_2 + " class = " + item_id_2 + ">" + s_item_txt_2 + "<div style=\"display:none\">" + i_ap_line_id + "</div><\/td>"
 						strVar += "<td align=\"center\" width=\"10%\" id = " + quantity_id_2 + " class = " + quantity_id_2 + ">" + i_quantity_2 + "<\/td>"
 						strVar += "<td align=\"center\" width=\"10%\" id = " + unreconciledquantity_id_2 + " class = " + unreconciledquantity_id_2 + " >" + i_unreconcilled_qty_2 + "<\/td>"
-							//  strVar += 		"<td align=\"center\" width=\"10%\" id = cv class = cv1 >"+i_unreconcilled_qty_2+"<\/td>" 
+						//  strVar += 		"<td align=\"center\" width=\"10%\" id = cv class = cv1 >"+i_unreconcilled_qty_2+"<\/td>" 
 						strVar += "<\/tr>";
 					}
 				}
@@ -4719,58 +4733,50 @@ function remove_product_reconcilliation_data(i_PRD_ID) {
 	} //Product Reconcilliation Data
 } //Product Reconcilliation Data
 
-function  is_AP_Bill_fully_reconciled(i_AP_Bill_ID)
-{
-   var result = false;
-   
-	if(_logValidation(i_AP_Bill_ID))
-	{
-	   var filter = new Array();
-	   filter[0] = new nlobjSearchFilter('custrecord_ap_stock_recon_status', null, 'is', 1);
-	   filter[1] = new nlobjSearchFilter('internalid', null, 'is', i_AP_Bill_ID);
-	   
-	   var columns = new Array();
-	   columns[0] = new nlobjSearchColumn('internalid');
-	  
-	   var	a_search_results = nlapiSearchRecord('customrecord_mp_ap_stock_receipt',null,filter,columns);	
-		
-		if(_logValidation(a_search_results))
-		{
-		   for(var cn = 0 ;cn<a_search_results.length ;cn++)
-		   {
-			   var i_recordID = a_search_results[cn].getValue('internalid'); 
-			   nlapiLogExecution('DEBUG', 'is_AP_Bill_fully_reconciled', '  AP Bill ID -->'+i_recordID);
-			   result = true;
-		   }//Loop Search Results		
-		}//Search Results	
+function is_AP_Bill_fully_reconciled(i_AP_Bill_ID) {
+	var result = false;
+
+	if (_logValidation(i_AP_Bill_ID)) {
+		var filter = new Array();
+		filter[0] = new nlobjSearchFilter('custrecord_ap_stock_recon_status', null, 'is', 1);
+		filter[1] = new nlobjSearchFilter('internalid', null, 'is', i_AP_Bill_ID);
+
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('internalid');
+
+		var a_search_results = nlapiSearchRecord('customrecord_mp_ap_stock_receipt', null, filter, columns);
+
+		if (_logValidation(a_search_results)) {
+			for (var cn = 0; cn < a_search_results.length; cn++) {
+				var i_recordID = a_search_results[cn].getValue('internalid');
+				nlapiLogExecution('DEBUG', 'is_AP_Bill_fully_reconciled', '  AP Bill ID -->' + i_recordID);
+				result = true;
+			} //Loop Search Results		
+		} //Search Results	
 	}
 	return result;
 }
 
-function  is_AP_Product_Order_fully_reconciled(i_AP_Product_ID)
-{
-   var result = false;
-   
-	if(_logValidation(i_AP_Product_ID))
-	{
-	   var filter = new Array();
-	   filter[0] = new nlobjSearchFilter('custrecord_ap_order_recon_status', null, 'is', 1);
-	   filter[1] = new nlobjSearchFilter('internalid', null, 'is', i_AP_Product_ID);
-	   
-	   var columns = new Array();
-	   columns[0] = new nlobjSearchColumn('internalid');
-	  
-	   var	a_search_results = nlapiSearchRecord('customrecord_mp_ap_product_order',null,filter,columns);	
-		
-		if(_logValidation(a_search_results))
-		{
-		   for(var cn = 0 ;cn<a_search_results.length ;cn++)
-		   {
-			   var i_recordID = a_search_results[cn].getValue('internalid'); 
-			   nlapiLogExecution('DEBUG', 'is_AP_Product_Order_fully_reconciled', '  AP Product Order ID -->'+i_recordID);
-			   result = true;
-		   }//Loop Search Results		
-		}//Search Results	
+function is_AP_Product_Order_fully_reconciled(i_AP_Product_ID) {
+	var result = false;
+
+	if (_logValidation(i_AP_Product_ID)) {
+		var filter = new Array();
+		filter[0] = new nlobjSearchFilter('custrecord_ap_order_recon_status', null, 'is', 1);
+		filter[1] = new nlobjSearchFilter('internalid', null, 'is', i_AP_Product_ID);
+
+		var columns = new Array();
+		columns[0] = new nlobjSearchColumn('internalid');
+
+		var a_search_results = nlapiSearchRecord('customrecord_mp_ap_product_order', null, filter, columns);
+
+		if (_logValidation(a_search_results)) {
+			for (var cn = 0; cn < a_search_results.length; cn++) {
+				var i_recordID = a_search_results[cn].getValue('internalid');
+				nlapiLogExecution('DEBUG', 'is_AP_Product_Order_fully_reconciled', '  AP Product Order ID -->' + i_recordID);
+				result = true;
+			} //Loop Search Results		
+		} //Search Results	
 	}
 	return result;
 }

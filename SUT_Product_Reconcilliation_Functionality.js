@@ -379,6 +379,7 @@ function suiteletFunction(request, response) {
 			var a_bill_array = new Array();
 			var a_product_array = new Array();
 			nlapiLogExecution('DEBUG', 'a_TT_array_values  ', 'a_TT_array_values -->' + a_TT_array_values);
+			nlapiLogExecution('DEBUG', 'a_TT_array_values Length ', a_TT_array_values.length);
 
 			if (_logValidation(a_TT_array_values)) {
 				for (var t_x = 0; t_x < a_TT_array_values.length; t_x++) {
@@ -402,8 +403,12 @@ function suiteletFunction(request, response) {
 						i_bill_1_G = i_bill_1_G.replace(/[^.0-9]/g, "");
 						i_unreconcilled_qty_2 = i_unreconcilled_qty_2.replace(/[^.0-9]/g, "");
 
-						if (status == 'T') {
+						nlapiLogExecution('DEBUG', 'status', status);
+						if (status == 'T' || status == 'T]') {
 							if (_logValidation(i_AP_Line_ID_1)) {
+
+								nlapiLogExecution('DEBUG', 'INSIDE');
+
 								var o_AP_Line_OBJ_1 = nlapiLoadRecord('customrecord_ap_stock_line_item', i_AP_Line_ID_1);
 
 								o_AP_Line_OBJ_1.setFieldValue('custrecord_ap_line_unrecon_qty', i_unreconcilled_qty_1);

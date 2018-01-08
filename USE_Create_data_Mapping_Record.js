@@ -66,6 +66,7 @@ function userEventBeforeSubmit_Create_Mapping_dat(type)
 				    // CREATE RECONCILE DATA RECORDD
 	        	    var new_rec_Obj = nlapiCreateRecord(rec_Type,{recordmode: 'dynamic'});
 	        	     new_rec_Obj.setFieldValue('custrecord_partner_user',i_user); // Set Current User
+	        	     new_rec_Obj.setFieldValue('custrecord_recon_map_zee', i_user);
 				     var i_submit_product_data = nlapiSubmitRecord(new_rec_Obj,true,true);
 				    nlapiLogExecution('DEBUG', 'customrecord_pr_mappings ', 'customrecord_pr_mappings  '+i_submit_product_data);
 			     }
@@ -97,6 +98,7 @@ function userEventAfterSubmit_Create_Mapping_data(type)
 			  var rec_ID = nlapiGetRecordId();
 			  var o_product_mappingsOBJ = nlapiCreateRecord('customrecord_pr_mappings',{recordmode: 'dynamic'});
 			  o_product_mappingsOBJ.setFieldValue('custrecord_partner_user',rec_ID);
+			  o_product_mappingsOBJ.setFieldValue('custrecord_recon_map_zee', rec_ID);
 			  var i_submit_product_mappingsID = nlapiSubmitRecord(o_product_mappingsOBJ,true,true);
 			  nlapiLogExecution('DEBUG', 'post_restlet_function', 'Product Reconcilliation Mappings ID {CREATE}-->'+i_submit_product_mappingsID);
 		  
