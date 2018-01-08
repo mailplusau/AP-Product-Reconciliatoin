@@ -18,6 +18,11 @@
  * @returns {Void}
  */
 
+ //WS Edit: Allow Delete if Administrator or System Support
+var role = nlapiGetRole();
+//Administrator = 3
+//System Suport = 1032
+
 /** BEFORE SUBMIT FUNCTION **/
 function userEventBeforeSubmit_Create_Mapping_dat(type)
 {
@@ -25,7 +30,9 @@ function userEventBeforeSubmit_Create_Mapping_dat(type)
 	var rec_ID = nlapiGetRecordId();
 	nlapiLogExecution('DEBUG', 'Record Type before submit', rec_Type);
 
-	if(type == 'delete' && rec_Type == 'customrecord_product_reconciliation_data')
+	//if(type == 'delete' && rec_Type == 'customrecord_product_reconciliation_data')
+	//WS Edit: add role as a condition to trigger
+	if(type == 'delete' && rec_Type == 'customrecord_product_reconciliation_data' && role != 3 && role != 1032)
 	{
         try
 		{
@@ -51,7 +58,9 @@ function userEventBeforeSubmit_Create_Mapping_dat(type)
 		 }
 	  }	
 	
-	if(type == 'delete' && rec_Type == 'customrecord_pr_mappings')
+	//if(type == 'delete' && rec_Type == 'customrecord_pr_mappings')
+	//WS Edit: add role as a condition to trigger
+	if(type == 'delete' && rec_Type == 'customrecord_pr_mappings' && role != 3 && role != 1032)
 	{
         try
 		{
@@ -66,6 +75,7 @@ function userEventBeforeSubmit_Create_Mapping_dat(type)
 				    // CREATE RECONCILE DATA RECORDD
 	        	    var new_rec_Obj = nlapiCreateRecord(rec_Type,{recordmode: 'dynamic'});
 	        	     new_rec_Obj.setFieldValue('custrecord_partner_user',i_user); // Set Current User
+	        	     new_rec_Obj.setFieldValue('custrecord_recon_map_zee', i_user);
 				     var i_submit_product_data = nlapiSubmitRecord(new_rec_Obj,true,true);
 				    nlapiLogExecution('DEBUG', 'customrecord_pr_mappings ', 'customrecord_pr_mappings  '+i_submit_product_data);
 			     }
@@ -97,6 +107,7 @@ function userEventAfterSubmit_Create_Mapping_data(type)
 			  var rec_ID = nlapiGetRecordId();
 			  var o_product_mappingsOBJ = nlapiCreateRecord('customrecord_pr_mappings',{recordmode: 'dynamic'});
 			  o_product_mappingsOBJ.setFieldValue('custrecord_partner_user',rec_ID);
+			  o_product_mappingsOBJ.setFieldValue('custrecord_recon_map_zee', rec_ID);
 			  var i_submit_product_mappingsID = nlapiSubmitRecord(o_product_mappingsOBJ,true,true);
 			  nlapiLogExecution('DEBUG', 'post_restlet_function', 'Product Reconcilliation Mappings ID {CREATE}-->'+i_submit_product_mappingsID);
 		  
