@@ -176,6 +176,7 @@ function suiteletFunction(request, response) {
 										obj_ap_prd_order.setFieldValue('custrecord_ap_line_recon_status', 2);
 										var submitted_id_ap_item = nlapiSubmitRecord(obj_ap_prd_order, true, true);
 										var submitted_ap_ordr = nlapiSubmitField('customrecord_mp_ap_product_order', app_prod_order, 'custrecord_mapping_reconcilliation_statu', 3, true);
+										var submitted_ap_ordr = nlapiSubmitField('customrecord_mp_ap_product_order', app_prod_order, 'custrecord_ap_order_recon_status', 3, true);
 									} else {
 										obj_ap_prd_order.setFieldValue('custrecord_ap_is_matching_done', 'F');
 										obj_ap_prd_order.setFieldValue('custrecord_reconciled_ap_bill', '');
@@ -185,8 +186,8 @@ function suiteletFunction(request, response) {
 										var a_flds_array = new Array();
 										var a_values_array = new Array();
 
-										a_flds_array = ['custrecord_mapping_reconcilliation_statu', 'custrecord_ap_p_color'];
-										a_values_array = [3, 2];
+										a_flds_array = ['custrecord_mapping_reconcilliation_statu', 'custrecord_ap_p_color', 'custrecord_ap_order_recon_status'];
+										a_values_array = [3, 2, 3];
 
 										var submitted_ap_ordr = nlapiSubmitField('customrecord_mp_ap_product_order', app_prod_order, a_flds_array, a_values_array, true);
 
@@ -228,6 +229,7 @@ function suiteletFunction(request, response) {
 										// UPDATE STATUS ON AP BILL RECORD
 										var ap_bill_order_Obj = nlapiLoadRecord('customrecord_mp_ap_stock_receipt', app_bill);
 										ap_bill_order_Obj.setFieldValue('custrecord_bill_mapping_reconcilliation', 3);
+										ap_bill_order_Obj.setFieldValue('custrecord_ap_stock_recon_status', 3);
 
 										if (a_authorized_bill_array.indexOf(app_bill) == -1) {
 											ap_bill_order_Obj.setFieldValue('custrecord_ap_s_color', 2);
@@ -246,6 +248,7 @@ function suiteletFunction(request, response) {
 										var ap_bill_order_Obj = nlapiLoadRecord('customrecord_mp_ap_stock_receipt', app_bill);
 
 										ap_bill_order_Obj.setFieldValue('custrecord_bill_mapping_reconcilliation', 3);
+										ap_bill_order_Obj.setFieldValue('custrecord_ap_stock_recon_status', 3);
 
 										if (a_authorized_bill_array.indexOf(app_bill) == -1) {
 											ap_bill_order_Obj.setFieldValue('custrecord_ap_s_color', 2);

@@ -134,7 +134,9 @@ function suiteletFunction(request, response) {
 			var a_unmatching_File = '';
 			var a_search_results = nlapiSearchRecord('customrecord_pr_mappings', null, a_filters, columns);
 
-			if (_logValidation(a_search_results)) {
+			nlapiLogExecution('DEBUG', 'a_search_results length', a_search_results.length);
+
+			if (_logValidation(a_search_results) && a_search_results.length == 1) {
 				var i_pr_mappings_ID = a_search_results[0].getValue('internalid');
 				a_product_mappings_array = a_search_results[0].getValue('custrecord_apbill_approduct_mappings');
 				a_unmatching_File = a_search_results[0].getValue('custrecord_unmatching_csv_file');
@@ -315,7 +317,7 @@ function suiteletFunction(request, response) {
 
 				// 	}//PR OBJ		  
 				// }
-			} else {
+			} else if (a_search_results.length == 0) {
 				var o_product_mappingsOBJ = nlapiCreateRecord('customrecord_pr_mappings', {
 					recordmode: 'dynamic'
 				});
@@ -325,6 +327,10 @@ function suiteletFunction(request, response) {
 				o_product_mappingsOBJ.setFieldValue('custrecord_unmatching_csv_file', '');
 				var i_submit_product_mappingsID = nlapiSubmitRecord(o_product_mappingsOBJ, true, true);
 				nlapiLogExecution('DEBUG', 'post_restlet_function', ' ------ Product Reconcilliation Mappings Submit ID {CREATE}-->' + i_submit_product_mappingsID);
+			} else if (a_search_results.length > 1) {
+				var body = 'More than 1 Product Mapping Record for Franchisee' + i_user;
+
+				nlapiSendEmail(112209, ['ankith.ravindran@mailplus.com.au', 'willian.suryadharma@mailplus.com.au'], 'SUT Product Reconcilliation Script - More than 1 Product Mapping Record', body, null);
 			}
 		}
 
@@ -974,7 +980,7 @@ function suiteletFunction(request, response) {
 
 
 						if (i_bill_id == old_bill_id && i_ap_line_id_1 == old_po_id && !isNullorEmpty(old_bill_id) && !isNullorEmpty(old_po_id)) {
-							
+
 						} else {
 							a_product_mappings_array_ar += '[' + i_bill_id + '|' + i_ap_line_id_1 + ']'
 						}
